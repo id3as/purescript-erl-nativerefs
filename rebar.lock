@@ -1,0 +1,4 @@
+[{<<"nativerefs">>,
+  {git,"https://github.com/id3as/nativerefs.git",
+       {ref,"3c18cc6c15080d03d1d77d2a726e88e4e0550f5a"}},
+  0}].
