@@ -23,10 +23,8 @@ write(Value, Ref) ->
   fun() ->
       case nativerefs:ref_try_write(Ref, Value) of
         ok ->
-      %%    io:format(user, "write: not_busy ~n", []),
           ok;
         busy ->
-          io:format(user, "ref-write: busy ~n", []),
           ok = nativerefs:ref_write(Ref, Value)
       end
   end.
@@ -38,12 +36,10 @@ readWithLock(Ref) ->
      %%   io:format(user, "read-with-lock: not_busy ~n", []),
         { Lock, Value };
       busy ->
-        io:format(user, "read-with-lock: busy ~n", []),
         { Time, Result } = timer:tc(fun() ->
                                         { ok, Lock, Value } = nativerefs:ref_read_with_lock(Ref),
                                         { Lock, Value }
                                     end),
-        io:format(user, "locked for ~p ~n", [ Time ]),
         Result
     end
   end.
