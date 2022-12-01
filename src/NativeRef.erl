@@ -33,14 +33,10 @@ readWithLock(Ref) ->
   fun() ->
     case nativerefs:ref_try_read_with_lock(Ref) of
       { ok, Lock, Value } ->
-     %%   io:format(user, "read-with-lock: not_busy ~n", []),
         { Lock, Value };
       busy ->
-        { Time, Result } = timer:tc(fun() ->
-                                        { ok, Lock, Value } = nativerefs:ref_read_with_lock(Ref),
-                                        { Lock, Value }
-                                    end),
-        Result
+        { ok, Lock, Value } = nativerefs:ref_read_with_lock(Ref),
+        { Lock, Value }
     end
   end.
 
