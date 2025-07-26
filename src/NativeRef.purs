@@ -7,6 +7,11 @@ import Erl.Data.Tuple (Tuple2, uncurry2)
 -- | Handle to a thread-safe reference to a shared value
 foreign import data Ref :: Type -> Type
 
+foreign import refEq :: forall a. Ref a -> Ref a -> Boolean
+
+instance Eq (Ref a) where
+  eq = refEq
+
 -- | Create a new ref containing value 'a'
 foreign import new :: forall a. a -> Effect (Ref a)
 

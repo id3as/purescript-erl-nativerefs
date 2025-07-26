@@ -5,7 +5,10 @@
         , write/2
         , readWithLock/1
         , writeWithLock/2
+        , refEq/2
         ]).
+
+refEq(A,B) -> A == B.
 
 new(Val) ->
   fun() ->
